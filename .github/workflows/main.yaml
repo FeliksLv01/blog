@@ -1,56 +1,40 @@
-name: docs
+name: Deploy blog
 
 on:
-  # 每当 push 到 main 分支时触发部署
   push:
     branches: [main]
-  # 手动触发部署
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
-  docs:
+  deploy:
     runs-on: ubuntu-latest
-
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
-          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v6
         with:
-          # 选择要使用的 node 版本
-          node-version: "14"
-
-      # 缓存 node_modules
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        id: yarn-cache
+          node-version: "22"
+          cache: npm
+      - uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm run build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+      - uses: actions/upload-pages-artifact@v4
         with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      # 如果缓存没有命中，安装依赖
-      - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn
-
-      # 运行构建脚本
-      - name: Build VuePress site
-        run: yarn build
-
-      - name: Copy CNAME
-        run: cp CNAME public/
-
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: public/
+          path: public
+      - uses: actions/deploy-pages@v4
+        id: deployment
