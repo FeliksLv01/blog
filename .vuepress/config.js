@@ -1,7 +1,5 @@
-const base = "/Blog/"
-
 module.exports = {
-  base,
+  base: "/Blog/",
   title: "FeliksLv的博客",
   description: "记录学习过程，分享生活琐碎。",
   dest: "public",
@@ -15,7 +13,7 @@ module.exports = {
       "link",
       {
         rel: "icon",
-        href: `${base}favicon.png`
+        href: "/favicon.png"
       }
     ],
     [
