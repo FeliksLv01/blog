@@ -56,12 +56,12 @@ const groups = computed(() => {
     </div>
 
     <div v-for="[year, entries] in groups" :key="year" class="year-group">
-      <h2 v-if="mode !== 'home'">{{ year }}</h2>
+      <component :is="mode === 'home' ? 'h3' : 'h2'" class="year-heading">{{ year }}</component>
       <ul>
         <li v-for="post in entries" :key="post.url">
           <a :href="withBase(post.url)">
             <span class="post-title">{{ post.title }}</span>
-            <time :datetime="post.date">{{ mode === 'home' ? post.date : post.date.slice(5) }}</time>
+            <time :datetime="post.date">{{ post.date.slice(5) }}</time>
           </a>
         </li>
       </ul>

@@ -51,7 +51,7 @@ h2 { font-size: 1.25rem; }
 .intro p { margin: .8rem 0 0; color: var(--muted); line-height: 1.7; }
 .post-index > h2 { margin: 0 0 .85rem; }
 .year-group + .year-group { margin-top: 1.75rem; }
-.year-group h2 { margin: 1.75rem 0 .75rem; }
+.year-heading { margin: 1.75rem 0 .75rem; font-size: 1.25rem; }
 .year-group ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .year-group li { border-bottom: 1px solid var(--line); }
 .year-group a { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: baseline; padding: .95rem 0; color: var(--ink); text-decoration: none; }
