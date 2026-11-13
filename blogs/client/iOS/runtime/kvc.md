@@ -34,7 +34,7 @@ NSLog(@"%d", [person valueForKey:@"age"]);
 
 当调用 setValue:forKey:设置属性 value 时，其底层的执行流程为
 
-【第一步】首先查找是否有这三种 setter 方法，按照查找顺序为 set<Key>：-> \_set<Key> -> setIs<Key>
+【第一步】首先查找是否有这三种 setter 方法，按照查找顺序为 `set<Key>`：-> `_set<Key>` -> `setIs<Key>`
 
 如果有其中任意一个 setter 方法，则直接设置属性的 value（主注意：key 是指成员变量名，首字符大小写需要符合 KVC 的命名规范）
 
@@ -42,7 +42,7 @@ NSLog(@"%d", [person valueForKey:@"age"]);
 
 【第二步】：如果没有第一步中的三个简单的 setter 方法，则查找 accessInstanceVariablesDirectly 是否返回 YES，
 
-如果返回 YES，则查找间接访问的实例变量进行赋值，查找顺序为：\_<key> -> \_is<Key> -> <key> -> is<Key>
+如果返回 YES，则查找间接访问的实例变量进行赋值，查找顺序为：`_<key>` -> `_is<Key>` -> `<key>` -> `is<Key>`
 
 如果找到其中任意一个实例变量，则赋值
 
@@ -58,13 +58,13 @@ NSLog(@"%d", [person valueForKey:@"age"]);
 
 当调用 valueForKey：时，其底层的执行流程如下
 
-【第一步】首先查找 getter 方法，按照 get<Key> -> <key> -> is<Key> -> \_<key>的方法顺序查找，
+【第一步】首先查找 getter 方法，按照 `get<Key>` -> `<key>` -> `is<Key>` -> `_<key>`的方法顺序查找，
 
 如果找到，则进入【第五步】
 
 如果没有找到，则进入【第二步】
 
-【第二步】如果还没有找到，检查类方法 accessInstanceVariablesDirectly 是否 YES，依次搜索\_<key>，\_is<Key>，<key>或 is<Key>的实例变量
+【第二步】如果还没有找到，检查类方法 accessInstanceVariablesDirectly 是否 YES，依次搜索`_<key>`，`_is<Key>`，`<key>`或 `is<Key>`的实例变量
 
 如果搜到，直接获取实例变量的值，进入【第三步】
 

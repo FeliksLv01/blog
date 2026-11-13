@@ -23,10 +23,10 @@ kotlin 完全抛弃了 java 中的基本类型，全部使用了对象数据类�
 |          |    Kotlin     | Java        |
 | :------: | :-----------: | ----------- |
 |   整型   |   IntArray    | int[]       |
-| 整型装箱 |  Array<Int>   | Integer[]   |
+| 整型装箱 | `Array<Int>`  | Integer[]   |
 |   字符   |   CharArray   | char[]      |
-| 字符装箱 |  Array<Char>  | Character[] |
-|  字符串  | Array<String> | String[]    |
+| 字符装箱 | `Array<Char>` | Character[] |
+|  字符串  | `Array<String>` | String[]    |
 
 数组的创建
 
@@ -423,7 +423,7 @@ println(maxLengthFruit)
 
 lambda 表达式结构
 
-> {参数名 1: 参数类型, 参数名 2: 参数类型 -> 函数体 }
+> `{参数名 1: 参数类型, 参数名 2: 参数类型 -> 函数体 }`
 
 ```kotlin
 val maxLengthFruit = list.maxBy({ fruit: String -> fruit.length })

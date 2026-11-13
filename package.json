@@ -5,14 +5,15 @@
   "repository": "https://github.com/felikslv01/Blog",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev . --open --host \"localhost\"",
-    "build": "vuepress build ."
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
+  "description": "blog",
   "devDependencies": {
-    "@maginapp/vuepress-plugin-katex": "^1.0.11",
-    "vuepress": "^1.9.10",
-    "vuepress-plugin-code-copy": "^1.0.6",
-    "vuepress-theme-reco": "^1.6.17"
+    "markdown-it-mathjax3": "4.3.2",
+    "vitepress": "1.6.4",
+    "vue": "3.5.45"
   },
-  "description": "blog"
+  "type": "module"
 }

@@ -6,3 +6,5 @@ yarn.error
 # build directory
 /public/
 /public/.DS_Store
+/.vitepress/cache/
+/.vitepress/dist/
