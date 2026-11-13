@@ -1,13 +1,15 @@
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 
+const base = '/blog/'
+
 export default defineConfig({
   title: 'FeliksLv 的博客',
   lang: 'zh-CN',
-  base: '/Blog/',
+  base,
   srcExclude: ['README.md', 'public/**'],
   appearance: false,
-  head: [['link', { rel: 'icon', href: '/Blog/favicon.png' }]],
+  head: [['link', { rel: 'icon', href: `${base}favicon.png` }]],
   markdown: {
     theme: 'dark-plus',
     math: true,

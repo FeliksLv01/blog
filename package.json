@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "1.0.0",
   "author": "felikslv",
-  "repository": "https://github.com/felikslv01/Blog",
+  "repository": "https://github.com/FeliksLv01/blog",
   "license": "MIT",
   "scripts": {
     "dev": "vitepress dev",
