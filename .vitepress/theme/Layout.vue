@@ -6,7 +6,6 @@ const { page, frontmatter, site } = useData()
 const route = useRoute()
 const nav = [
   { label: '首页', path: '/' },
-  { label: '归档', path: '/timeline/' },
   { label: '分类', path: '/categories/' },
   { label: '标签', path: '/tag/' },
   { label: '关于', path: '/others/about.html' }
@@ -37,7 +36,7 @@ const isIndex = computed(() => frontmatter.value.layout === 'blog-index')
     <Content v-else-if="isIndex" />
     <article v-else class="article">
       <header class="article-header">
-        <a v-if="page.relativePath.startsWith('blogs/')" :href="withBase('/timeline/')">← 全部文章</a>
+        <a v-if="page.relativePath.startsWith('blogs/')" :href="withBase('/')">← 全部文章</a>
         <h1>{{ page.title }}</h1>
         <div v-if="date || frontmatter.categories?.length || frontmatter.tags?.length" class="article-meta">
           <time v-if="date" :datetime="date">{{ date }}</time>

@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { data as posts } from './posts.data'
 
-const props = withDefaults(defineProps<{ mode?: 'home' | 'archive' | 'categories' | 'tags' }>(), {
+const props = withDefaults(defineProps<{ mode?: 'home' | 'categories' | 'tags' }>(), {
   mode: 'home'
 })
 const avatar = ref<HTMLImageElement>()
@@ -23,9 +23,9 @@ onMounted(() => {
 const selected = ref('')
 const field = computed(() => props.mode === 'tags' ? 'tags' : 'categories')
 const facets = computed(() => [...new Set(posts.flatMap(post => post[field.value]))].sort())
-const visible = computed(() => props.mode === 'home'
-  ? posts.slice(0, 10)
-  : posts.filter(post => !selected.value || post[field.value].includes(selected.value)))
+const visible = computed(() => selected.value
+  ? posts.filter(post => post[field.value].includes(selected.value))
+  : posts)
 const groups = computed(() => {
   const years = new Map<string, typeof posts>()
   for (const post of visible.value) {
@@ -45,11 +45,8 @@ const groups = computed(() => {
   </section>
 
   <section class="post-index">
-    <div v-if="mode === 'home'" class="index-heading">
-      <h2>近期文章</h2>
-      <a :href="withBase('/timeline/')">全部文章 <span aria-hidden="true">↗</span></a>
-    </div>
-    <h1 v-else>{{ { archive: '归档', categories: '分类', tags: '标签' }[mode] }}</h1>
+    <h2 v-if="mode === 'home'">全部文章</h2>
+    <h1 v-else>{{ mode === 'categories' ? '分类' : '标签' }}</h1>
 
     <div v-if="mode === 'categories' || mode === 'tags'" class="filters" :aria-label="mode === 'tags' ? '按标签筛选' : '按分类筛选'">
       <button :aria-pressed="selected === ''" @click="selected = ''">全部</button>

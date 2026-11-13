@@ -1,10 +1,10 @@
 ---
 layout: blog-index
-title: 归档
+title: 全部文章
+head:
+  - - meta
+    - http-equiv: refresh
+      content: '0; url=../'
 ---
 
-<script setup>
-import PostIndex from '../.vitepress/theme/PostIndex.vue'
-</script>
-
-<PostIndex mode="archive" />
+[查看全部文章](../)
